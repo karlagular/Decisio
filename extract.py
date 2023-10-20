@@ -62,7 +62,7 @@ if docx_files:
             if p.style.name == 'Heading 3':
                 break
             # variable filled with all paragraphs in current chapter
-            textvar += f"{p.text}"
+            textvar += f"{p.text} "
         # if the Subtitle matches the first item on the list of headings...
         elif p.style.name == 'Heading 3' and p.text == headings_3[0]:
             # we found the heading we're looking for
@@ -87,7 +87,7 @@ if docx_files:
             if p.style.name == 'Heading 1':
                 break
             # variable filled with all paragraphs in current chapter
-            textvar += f"{p.text}"
+            textvar += f"{p.text} "
         # if the Subtitle matches the first item on the list of headings...
         elif p.style.name == 'Heading 3' and p.text == headings_3[1]:
             # we found the heading we're looking for
@@ -110,7 +110,7 @@ if docx_files:
                     break
                 # variable filled with all paragraphs in current chapter that aren't table descriptions
                 if not (p.text.startswith("Tabelle") or p.text.startswith("Abbildung")):
-                    textvar += f"{p.text}"
+                    textvar += f"{p.text} "
             # if the Subtitle matches the first item on the list of headings...
             elif p.style.name == 'Heading 2' and p.text == headings_2[i-1]:
                 # we found the heading we're looking for
