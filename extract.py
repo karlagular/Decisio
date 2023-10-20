@@ -67,16 +67,62 @@ if docx_files:
         elif p.style.name == 'Heading 3' and p.text == headings_3[0]:
             # we found the heading we're looking for
             found_heading = True
-            print(p.text)
+            #print(p.text)
         
-        # We repeat the same code again, can be optimised later on to be called a sa function 
-        # with the arguments of what we're searching for and where to stop (condition for break)
-        # restart 
+    # Fill the first Dictionary value
+    chapt_paragraph[headings_3[0]]=textvar
+        
+    # We repeat the same code again, can be optimised later on to be called a sa function 
+    # with the arguments of what we're searching for and where to stop (condition for break)
+    
+    # flag reset to false 
+    found_heading = False
+
+    # textvar reset to empty string
+    textvar = ''
+
+    for p in document.paragraphs:
+        if found_heading:
+            # Extract text until the next Heading 2
+            if p.style.name == 'Heading 1':
+                break
+            # variable filled with all paragraphs in current chapter
+            textvar += f"{p.text}"
+        # if the Subtitle matches the first item on the list of headings...
+        elif p.style.name == 'Heading 3' and p.text == headings_3[1]:
+            # we found the heading we're looking for
+            found_heading = True
+            #print(p.text)
+    # Fill the first Dictionary value
+    chapt_paragraph[headings_3[1]]=textvar   
+
+    # Repeat again but for the rest of the chapters using headings_2
+
+    # flag reset to false 
+    found_heading = False
+
+    # textvar reset to empty string
+    textvar = ''
+
+    for p in document.paragraphs:
+        if found_heading:
+            # Extract text until the next Heading 2
+            if p.style.name == 'Heading 2':
+                break
+            # variable filled with all paragraphs in current chapter
+            textvar += f"{p.text}"
+        # if the Subtitle matches the first item on the list of headings...
+        elif p.style.name == 'Heading 2' and p.text == headings_2[0]:
+            # we found the heading we're looking for
+            found_heading = True
+            #print(p.text)
+    # Fill the first Dictionary value
+    chapt_paragraph[headings_2[0]]=textvar
+    
 else:
     print("No .docx files found in the directory.")
 
 #print(textvar)
-# Fill the Dictionary value
-chapt_paragraph[headings_3[0]]=textvar
+
 
 print(chapt_paragraph)
