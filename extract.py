@@ -109,7 +109,7 @@ if docx_files:
                 if p.style.name == 'Heading 2' or p.style.name=='Heading 1':
                     break
                 # variable filled with all paragraphs in current chapter that aren't table descriptions
-                if not p.text.startswith("Tabelle"):
+                if not (p.text.startswith("Tabelle") or p.text.startswith("Abbildung")):
                     textvar += f"{p.text}"
             # if the Subtitle matches the first item on the list of headings...
             elif p.style.name == 'Heading 2' and p.text == headings_2[i-1]:
