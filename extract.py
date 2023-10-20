@@ -96,28 +96,28 @@ if docx_files:
     # Fill the first Dictionary value
     chapt_paragraph[headings_3[1]]=textvar   
 
-    # Repeat again but for the rest of the chapters using headings_2
+    # Repeat again but for the rest of the chapters using headings_2 inside a loop
+    for i in range(len(headings_2)):
+        # flag reset to false 
+        found_heading = False
+        # textvar reset to empty string
+        textvar = ''
 
-    # flag reset to false 
-    found_heading = False
-
-    # textvar reset to empty string
-    textvar = ''
-
-    for p in document.paragraphs:
-        if found_heading:
-            # Extract text until the next Heading 2
-            if p.style.name == 'Heading 2':
-                break
-            # variable filled with all paragraphs in current chapter
-            textvar += f"{p.text}"
-        # if the Subtitle matches the first item on the list of headings...
-        elif p.style.name == 'Heading 2' and p.text == headings_2[0]:
-            # we found the heading we're looking for
-            found_heading = True
-            #print(p.text)
-    # Fill the first Dictionary value
-    chapt_paragraph[headings_2[0]]=textvar
+        for p in document.paragraphs:
+            if found_heading:
+                # Extract text until the next Heading 2
+                if p.style.name == 'Heading 2' or p.style.name=='Heading 1':
+                    break
+                # variable filled with all paragraphs in current chapter that aren't table descriptions
+                if not p.text.startswith("Tabelle"):
+                    textvar += f"{p.text}"
+            # if the Subtitle matches the first item on the list of headings...
+            elif p.style.name == 'Heading 2' and p.text == headings_2[i-1]:
+                # we found the heading we're looking for
+                found_heading = True
+                #print(p.text)
+        # Fill the first Dictionary value
+        chapt_paragraph[headings_2[i-1]]=textvar
     
 else:
     print("No .docx files found in the directory.")
