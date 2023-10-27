@@ -17,10 +17,10 @@ for element in doc.element.body:
             # This element is a table
             t = element
             print("Table after Heading 2 paragraph:")
-            for row in t.rows:
-                for cell in row.cells:
-                    for p in cell.paragraphs:
-                        print(p.text)
+            #for row in t.iter("w:tr", namespaces=ns):
+                #for cell in row.iter("w:tc", namespaces=ns):
+                    #for p in cell.iter("w:p", namespaces=ns):
+                        #print(p.text)
     elif element.tag.endswith("p"):
         #print('paragraph found')
         p = element
