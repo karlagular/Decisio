@@ -1,14 +1,11 @@
-#EXTRACTS PARAGRAPHS FROM A DOCX FILE AND SAVES INTO A DICTIONARY ACCORDING TO THE CHAPTERS
+#EXTRACTS TABLES FROM A DOCX FILE AND SAVES INTO A ?? ACCORDING TO THE CHAPTERS
 
 import os
 from docx import Document
 
-#define a function that returns the content
+#define a function that returns the table content
 #def extract():
 
-#define a function that converts the .doc files to .docx 
-# (to be executed if the file ends in .doc)
-#def doc2docx(doc):
 
 #List al files in Porjectreports
 path = 'Projectreports'
