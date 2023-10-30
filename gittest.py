@@ -1,4 +1,3 @@
-
 from docx.text.paragraph import Paragraph
 from docx.document import Document
 from docx.table import _Cell, Table
@@ -26,6 +25,6 @@ def iter_block_items(parent):
                     yield from iter_block_items(cell)
                     
 #doc = docx.Document('word.docx')
-doc = Document("Projectreports/22-1297_Tobias-Nimz.docx")
+doc = docx.Document('Projectreports/22-1297_Tobias-Nimz.docx')
 for block in iter_block_items(doc):
 	print(block.text)
