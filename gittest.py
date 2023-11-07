@@ -68,6 +68,7 @@ D_Steckbrief={'Projektbezeichnung':'',
               'Abnahmekriterien':''}
 
 #2. Anforderungen und Ziele
+#Except for the Oberziel, it is possible for every other Sub-goal to be expanded later on
 D_Ziele={'Oberziel-Zielbezeichnung':'',
          'Oberziel-Zielbeschreibung':'',
          'Oberziel-Messkriterium':'',
@@ -96,9 +97,12 @@ D_Ziele={'Oberziel-Zielbezeichnung':'',
          'Rahmenziel 1-Zielbeschreibung':'',
          'Rahmenziel 1-Messkriterium':''}
 
+#Can be expanded
 D_Nichtziele={'Nichtziel 1':'',
               'Nichtziel 1-Beschreibung':''}
 
+#Unlike D_Ziele, this Dictionary is not supposed to be expanded.
+#If there are more Zielkonflikte, another Dictionary is to be created
 D_Zielkonflikt_1={'konkurrierendes Ziel 1':'',
                   'konkurrierendes Ziel 2':'',
                   'Art des Zielkonfliktes':'',
@@ -110,6 +114,7 @@ D_Zielkonflikt_1={'konkurrierendes Ziel 1':'',
 A_Z_PRE={'2 PRE':''}
 
 #3. Qualität (Abnahmekriterien)
+#All of the dictionaries in this chapter can be expanded but can also remain empty
 D_Zielsystem={'Bezeichnung 1':'',
               'Beschreibung 1':'',
               'Abnahmekriterium 1':'',
@@ -160,6 +165,8 @@ D_Umfeldportfolio={'sozial intern':'',
                  'sachlich intern':'',
                  'sachlich extern':''}
 
+#Stakeholder: Interessen, Erwartungen, Befrüchtungen, Massnahmen
+#Is supposed to be expanded
 D_Stakehoder_IEBM={'Stakeholder 1':'',
                    'Konfliktpotenzial 1':'',
                    'Einfluss 1':'',
@@ -171,6 +178,7 @@ D_Stakehoder_IEBM={'Stakeholder 1':'',
 SH_PRE={'4 PRE':''}
 
 #5. Chancen und Risiken
+#At least 3 Risks, can be expanded
 D_Risiken={'Risiko 1':'',
            'Beschreibung 1': '',
            'Art 1':'',
@@ -184,6 +192,7 @@ D_Risiken={'Risiko 1':'',
            'Art 3':'',
            'Ursache 3':''}
 
+#Is dependant on the amount of Risks in D_Risiken
 D_Massnahmen={'Eintrittsawhrscheinlichkeit 1':'',
               'Auswirkungen 1':'',
               'Risikowert 1':'',
@@ -198,8 +207,11 @@ D_Massnahmen={'Eintrittsawhrscheinlichkeit 1':'',
               'Auswirkungen 3':'',
               'Risikowert 3':'',
               'Massnahmen p 3':'',
-              'Massnahmen k 3':'',}
+              'Massnahmen k 3':'',
+              'Risikensumme':0}
 
+#At least one, can be expanded. 
+#Last entry to be used if the answer is in text instead of tables (2)
 D_Chancen={'Chance 1':'',
            'Beschreibung 1':'',
            'Art 1':'',
