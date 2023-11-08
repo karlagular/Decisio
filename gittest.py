@@ -226,12 +226,27 @@ D_Chancen={'Chance 1':'',
 C_R_PRE={'5 PRE':''}
 
 past_block=''
+
+#Prints all text blocks
 for block in iter_block_items(doc):
     current_block=block.text
     # ignore repeated cells, #ignore paragraphs starting with ignore_list
     if current_block != past_block: #and not current_block.startswith(ignore_list[0]) and not current_block.startswith(ignore_list[1]) and not current_block.startswith(ignore_list[2]) and not current_block.startswith(ignore_list[3]) and not current_block.startswith(ignore_list[4])
         print(block.text)
-        print(block.style)
+        #print(block.style)
     past_block=current_block
 
+
+#Saves the name of the project from the first table into a dictionary and prints it
+past_block=''
+for block in iter_block_items(doc):
+    current_block=block
+    # don't need to ignore repeated text from combined cells for this case
+    if past_block!='' and past_block.text == 'Projekt:':
+        D_Projektname['Projektname']=block.text
+        print(D_Projektname)
+        #print(type(block))
+    past_block=current_block
 #print(D_Projektname)
+
+#Looks for paragraphs in Chapter 1: 'Projektdesign 4.5.1'
