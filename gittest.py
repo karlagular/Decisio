@@ -244,9 +244,11 @@ for block in iter_block_items(doc):
     # don't need to ignore repeated text from combined cells for this case
     if past_block!='' and past_block.text == 'Projekt:':
         D_Projektname['Projektname']=block.text
-        print(D_Projektname)
         #print(type(block))
     past_block=current_block
-#print(D_Projektname)
+    
+print(D_Projektname)
 
-#Looks for paragraphs in Chapter 1: 'Projektdesign 4.5.1'
+#Looks for paragraphs in Subchapter 1.1.1: 'Projektbeschreibung und -design'
+# and saves them into a directory
+
