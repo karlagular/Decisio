@@ -246,9 +246,70 @@ for block in iter_block_items(doc):
         D_Projektname['Projektname']=block.text
         #print(type(block))
     past_block=current_block
-    
 print(D_Projektname)
+
 
 #Looks for paragraphs in Subchapter 1.1.1: 'Projektbeschreibung und -design'
 # and saves them into a directory
 
+# The text of the chapter will be saved into this variable
+textvar=""
+past_block=''
+found_Chapter=False
+for block in iter_block_items(doc):
+    current_block=block
+    # don't need to ignore repeated text from combined cells for this case
+    if found_Chapter:
+        if block.style.name=='Heading 3' or block.style.name=='Heading 1':
+            break
+        textvar+=block.text
+    if past_block!='' and past_block.text.startswith('Projektbeschreibung und -design'):
+        found_Chapter=True
+    #print(block.style.name)
+    past_block=current_block
+D_Projektdesign['Projektbeschreibung und -design']=textvar
+
+
+#Looks for paragraphs in Subchapter 1.1.2: 'Beschreibung des Projekterfolges aus Sicht der Kunden/des Auftraggebers'
+# and saves them into a directory
+
+# The text of the chapter will be saved into this variable
+textvar=""
+past_block=''
+found_Chapter=False
+for block in iter_block_items(doc):
+    current_block=block
+    # don't need to ignore repeated text from combined cells for this case
+    if found_Chapter:
+        if block.style.name=='Heading 3' or block.style.name=='Heading 1' or block.text=='Projektrelevanz und Einschätzung':
+            break
+        textvar+=block.text
+    if past_block!='' and past_block.text.startswith('Beschreibung des Projekterfolges aus Sicht der Kunden/des Auftraggebers'):
+        found_Chapter=True
+    #print(block.style.name)
+    past_block=current_block
+D_Projektdesign['Beschreibung des Projekterfolges aus Sicht der Kunden/des Auftraggebers']=textvar
+
+
+#Looks for paragraphs after 'Projektrelevanz und Einschätzung'
+# and saves them into a directory
+
+# The text of the chapter will be saved into this variable
+textvar=""
+past_block=''
+found_Chapter=False
+for block in iter_block_items(doc):
+    current_block=block
+    # don't need to ignore repeated text from combined cells for this case
+    if found_Chapter:
+        if block.style.name=='Heading 1':
+            break
+        textvar+=block.text
+    if past_block!='' and past_block.text.startswith('Projektrelevanz und Einschätzung'):
+        found_Chapter=True
+    #print(block.style.name)
+    past_block=current_block
+D_Projektdesign['Projektrelevanz und Einschätzung']=textvar
+
+
+print(D_Projektdesign)
