@@ -4,6 +4,7 @@ from docx.table import _Cell, Table
 from docx.oxml.text.paragraph import CT_P
 from docx.oxml.table import CT_Tbl
 import docx
+from openai import OpenAI
 
 
 def iter_block_items(parent):
@@ -238,13 +239,13 @@ C_R_PRE={'5 PRE':''}
 past_block=''
 
 #Prints all text blocks
-for block in iter_block_items(doc):
-    current_block=block.text
-    # ignore repeated cells, #ignore paragraphs starting with ignore_list
-    if current_block != past_block: #and not current_block.startswith(ignore_list[0]) and not current_block.startswith(ignore_list[1]) and not current_block.startswith(ignore_list[2]) and not current_block.startswith(ignore_list[3]) and not current_block.startswith(ignore_list[4])
-        print(block.text)
-        #print(block.style)
-    past_block=current_block
+#for block in iter_block_items(doc):
+#    current_block=block.text
+#    # ignore repeated cells, #ignore paragraphs starting with ignore_list
+#    if current_block != past_block: #and not current_block.startswith(ignore_list[0]) and not current_block.startswith(ignore_list[1]) and not current_block.startswith(ignore_list[2]) and not current_block.startswith(ignore_list[3]) and not current_block.startswith(ignore_list[4])
+#        print(block.text)
+#        #print(block.style)
+#    past_block=current_block
 
 
 #Saves the name of the project from the first table into a dictionary and prints it
@@ -321,7 +322,8 @@ for block in iter_block_items(doc):
     past_block=current_block
 D_Projektdesign['Projektrelevanz und Einschätzung']=textvar
 
-print(D_Projektdesign)
+#print(D_Projektdesign)
+#print('\n')
 
 #Looks for the contents of the Steckbrief table 
 # and saves them into a dictionary
@@ -333,4 +335,84 @@ print(D_Projektdesign)
 #for item in D_Steckbrief:
 #    D_Steckbrief[item]
 #    i+=1
-    
+
+
+# Everything pertaining openai:
+#Test example
+client = OpenAI(api_key='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')
+
+
+#completion_1_1_1_a = client.chat.completions.create(
+#  model="gpt-3.5-turbo",
+#  messages=[
+#    {"role": "system", "content": "Stell dir vor du bist Projektmanager und bildest neue Projektmanager aus. Die angehenden Projektmanager schreiben als Pruefungsleistung einen Projektreport. Diesen sollst du nun untersuchen und bewerten. Im folgenden Text wird das Projekt und das Projektdesign beschrieben. Der Text soll nach folgenden 4 Kriterien bewertet werden: 1. Die Beschreibung muss mit dem Projektname: %s übereinstimmen. 2. Beschreibung des Projektes in wenigen Sätzen mit Angaben zum Projektinhalt und –anlass. 3. Angaben zur Gestaltung des Projektablaufs, zur Einbindung in die Projektträgeraufbauorganisation und zum Auftraggeber (Name und Position). 4. Angabe der eigenen Linienposition (Stellung außerhalb des Projektes) und der wahrgenommenen Rolle im beschriebenen Projekt, letztere mit Aufgaben, Kompetenzen und Verantwortung sowie Stellung des Projektteams. \n Bewerte nun den Text nach den Kriterien. Schreibe 'erfuellt', wenn das Kriterium erfuellt wurde. Falls es nur teilweise oder nicht erfuellt wurde, fuege eine kleine Erklaerung hinzu. "%D_Projektname['Projektname']},
+#    {"role": "user", "content": D_Projektdesign['Projektbeschreibung und -design']}
+#  ]
+#)
+#print('completion_1_1_1_a')
+#print(completion)
+#print(completion_1_1_1_a.choices[0].message)
+##ChatCompletionMessage(content='
+## Ja, der Text erfüllt alle vier Kriterien:
+## 1. Der Projektname "XYZ H2 Speicher" wird im Text erwähnt.
+## 2. Der Projektinhalt wird beschrieben: Erstellung eines Engineering Reports für eine Wasserstoffspeicheranlage, einschließlich Kosten- und Zeitplanung.
+## 3. Es wird angegeben, dass das Projekt extern für die XYZ Gas Storage West GmbH durchgeführt wird. Der Auftraggeber ist Herr Simon Schmidt, der Projektleiter im übergeordneten Großprojekt "GET H2".
+## 4. Der Autor des Textes gibt seine eigene Linienposition als Projektingenieur / -leiter im Bereich "601 - Erdgas, Erdöl und Raffinerie Technik" an. Er beschreibt seine Rolle als Projektleiter mit Aufgaben wie die Einhaltung des Zieltermins, die fachliche Weisung des Projektteams und die technische Verantwortung für die Ingenieurleistungen. Er erwähnt außerdem, dass das Projektteam aus Mitarbeitern der ABC Engineering GmbH besteht.', 
+## role='assistant', function_call=None, tool_calls=None)     
+
+#completion_1_1_1_b = client.chat.completions.create(
+#  model="gpt-3.5-turbo",
+#  messages=[
+#    {"role": "system", "content": "Prüfe, ob der Text folgende Kriterien erfüllt: 1. Die Beschreibung muss mit dem Projektname: %s übereinstimmen. 2. Beschreibung des Projektes in wenigen Sätzen mit Angaben zum Projektinhalt und –anlass. 3. Angaben zur Gestaltung des Projektablaufs, zur Einbindung in die Projektträgeraufbauorganisation und zum Auftraggeber (Name und Position). 4. Angabe der eigenen Linienposition (Stellung außerhalb des Projektes) und der wahrgenommenen Rolle im beschriebenen Projekt, letztere mit Aufgaben, Kompetenzen und Verantwortung sowie Stellung des Projektteams. "%D_Projektname['Projektname']},
+#    {"role": "user", "content": D_Projektdesign['Projektbeschreibung und -design']}
+#  ]
+#)
+##print('completion_1_1_1_b')
+#print(completion_1_1_1_b.choices[0].message)
+##ChatCompletionMessage(content=
+## 'Der Text erfüllt die gegebenen Kriterien:
+## 1. Der Text enthält den Projektnamen "XYZ H2 Speicher".
+## 2. Es wird eine Beschreibung des Projektes in wenigen Sätzen mit Angaben zum Projektinhalt und -anlass gegeben.
+## 3. Es werden Angaben zur Gestaltung des Projektablaufs, zur Einbindung in die Projektträgeraufbauorganisation und zum Auftraggeber gemacht.
+## 4. Es wird die Linienposition des eigenen Projektteams und die wahrgenommene Rolle im Projekt beschrieben, einschließlich Aufgaben, Kompetenzen und Verantwortung. Auch die Stellung des Projektteams wird erwähnt.',
+##  role='assistant', function_call=None, tool_calls=None)
+
+
+#completion_1_1_2_a = client.chat.completions.create(
+#  model="gpt-3.5-turbo",
+#  messages=[
+#    {"role": "system", "content": "Stell dir vor du bist Projektmanager und bildest neue Projektmanager aus. Die angehenden Projektmanager schreiben als Pruefungsleistung einen Projektreport. Diesen sollst du nun untersuchen und bewerten. Im folgenden Text wird das Projekterfolg aus aus Sicht der Kunden/des Auftraggebers beschrieben. Der Text soll nach folgenden 3 Kriterien bewertet werden: 1. Beschreibung der Erwartungen der Kunden/des Auftraggebers an die Projektergebnisse. 2. Ansatzpunkte für Projekterfolg: quantitative Dimensionen des Magisches Dreiecks, Zielgröße des magischen Dreiecks mit der höchsten Priorität, Erfüllung vertraglich vereinbarter Leistungen unter Berücksichtigung der Claims, Stakeholderzufriedenheit, weitere Ziele von Stakeholdern. 3.Es ist eine generelle Priorisierung von Leistungs-, Kosten- und Terminzielen zu formulieren (z. B. 1. Leistung, 2. Kosten, 3. Termine). \n Bewerte nun den Text nach den Kriterien. Schreibe 'erfuellt', wenn das Kriterium erfuellt wurde. Falls es nur teilweise oder nicht erfuellt wurde, fuege eine kleine Erklaerung hinzu."},
+#    {"role": "user", "content": D_Projektdesign['Beschreibung des Projekterfolges aus Sicht der Kunden/des Auftraggebers']}
+#  ]
+#)
+#print('completion_1_1_2_a')
+##print(completion)
+#print(completion_1_1_2_a.choices[0].message)
+##ChatCompletionMessage(content='
+## 1. Erfüllt: Der Text beschreibt die Erwartungen der Kunden/des Auftraggebers an die Projektergebnisse. Es werden konkrete Ziele und Anforderungen genannt, wie die Einhaltung von Terminen, Meilensteinen, Budget und Leistungen.
+## 2. Erfüllt: Der Text nennt verschiedene Ansatzpunkte für den Projekterfolg. Quantitative Dimensionen des Magischen Dreiecks, wie Termine und Budget, werden genannt. Die höchste Priorität liegt auf den Terminzielen. Die Erfüllung vertraglich vereinbarter Leistungen wird ebenfalls berücksichtigt. Es werden auch weitere Ziele von Stakeholdern genannt.
+## 3. Teilweise erfüllt: Es wird keine generelle Priorisierung von Leistungs-, Kosten- und Terminzielen formuliert. Es werden zwar einzelne Ziele priorisiert, wie die Einhaltung von Terminen, jedoch wird keine generelle Rangfolge angegeben.
+## Insgesamt ist der Text größtenteils erfüllt, da die beiden Hauptkriterien (Beschreibung der Kundenanforderungen und Ansatzpunkte für Projekterfolg) erfüllt sind. Jedoch fehlt es an einer allgemeinen Priorisierung der Ziele.', 
+## role='assistant', function_call=None, tool_calls=None)
+
+completion_1_1_2_b = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "Prüfe, ob der Text folgende Kriterien erfüllt oder nicht: 1. Beschreibung der Erwartungen der Kunden/des Auftraggebers an die Projektergebnisse. 2. Ansatzpunkte für Projekterfolg: quantitative Dimensionen des Magisches Dreiecks, Zielgröße des magischen Dreiecks mit der höchsten Priorität, Erfüllung vertraglich vereinbarter Leistungen unter Berücksichtigung der Claims, Stakeholderzufriedenheit, weitere Ziele von Stakeholdern. 3. Es ist eine generelle Priorisierung von Leistungs-, Kosten- und Terminzielen zu formulieren (z. B. 1. Leistung, 2. Kosten, 3. Termine)."},
+    {"role": "user", "content": D_Projektdesign['Beschreibung des Projekterfolges aus Sicht der Kunden/des Auftraggebers']}
+  ]
+)
+print('completion_1_1_2_b')
+print(completion_1_1_2_b.choices[0].message)
+##ChatCompletionMessage(content='
+## Ja, der Text erfüllt die genannten Kriterien:
+## 1. Es wird beschrieben, welche Erwartungen die Kunden bzw. der Auftraggeber an die Projektergebnisse haben. Dabei werden sowohl terminliche als auch finanzielle Ziele genannt, sowie die Erfüllung der vereinbarten Leistungen.
+## 2. Es werden verschiedene Ansatzpunkte für den Projekterfolg benannt, die sich an den quantitativen Dimensionen des Magischen Dreiecks orientieren. Die höchste Priorität liegt dabei auf der Einhaltung der Termine. Außerdem wird die Erfüllung vertraglich vereinbarter Leistungen und die Zufriedenheit der Stakeholder als Erfolgsfaktoren genannt.
+## 3. Es wird keine generelle Priorisierung der Leistungs-, Kosten- und Terminziele formuliert, jedoch werden die unterschiedlichen Prioritäten der Stakeholder deutlich gemacht. Der Kunde legt dabei mehr Wert auf die Termineinhaltung, während der kaufmännische Leiter auf das Budget achtet und der Betriebsleiter das optimale technische Konzept betont.', 
+## role='assistant', function_call=None, tool_calls=None)
+
+# ChatCompletionMessage(content='
+# 1. Der Text erfüllt das Kriterium der Beschreibung der Erwartungen der Kunden/des Auftraggebers an die Projektergebnisse. Es werden konkrete Ziele wie die Einhaltung von Terminen, Budgets und Leistungen genannt.
+# 2. Der Text erfüllt das Kriterium der Ansatzpunkte für Projekterfolg. Es werden quantifizierbare Dimensionen des Magischen Dreiecks (Termine, Budgets, Leistungen) genannt, wobei die Termine die höchste Priorität haben. Zudem wird die Erfüllung vertraglich vereinbarter Leistungen und die Zufriedenheit der Stakeholder als weitere Ziele genannt.
+# 3. Der Text formuliert eine generelle Priorisierung von Leistungs-, Kosten- und Terminzielen, wobei die Termine die höchste Priorität haben.', 
+# role='assistant', function_call=None, tool_calls=None) 
