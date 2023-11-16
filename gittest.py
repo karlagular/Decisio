@@ -67,6 +67,16 @@ D_Steckbrief={'Projektbezeichnung':'',
               'Kunde':'',
               'Abnahmekriterien':''}
 
+#
+steckbrief_Suche=['Projektbezeichnung:',
+                  'Projektnummer:',
+                  'Auftraggeber (Name, Pos',
+                  'Projektleitung, Verantw',
+                  'Projektorgnisationsform',
+                  'Oberziel:',
+                  'Projektinhalt (was?):',
+                  'Projekt']
+
 #2. Anforderungen und Ziele
 #Except for the Oberziel, it is possible for every other Sub-goal to be expanded later on
 D_Ziele={'Oberziel-Zielbezeichnung':'',
@@ -311,5 +321,16 @@ for block in iter_block_items(doc):
     past_block=current_block
 D_Projektdesign['Projektrelevanz und Einschätzung']=textvar
 
-
 print(D_Projektdesign)
+
+#Looks for the contents of the Steckbrief table 
+# and saves them into a dictionary
+
+#textvar=""
+#past_block=''
+#found_Chapter=False
+#i=0
+#for item in D_Steckbrief:
+#    D_Steckbrief[item]
+#    i+=1
+    
