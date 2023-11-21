@@ -1,0 +1,18 @@
+HINWEISE FÜR AUTHOREN
+* Keine Bilder werden verarbeitet
+* Formular-Checkboxes müssen durch (x) oder (-) ersetzt werdem um eingelessen zu werden
+* Alle Daten müssen folgendes Format haben: TT.MM.JJJJ
+* Vor den Erkenntnisse zu den Kapiteln: "Projektrelevanz und Einschätzung" + Enter in fett und kursive hinzufügen.
+* Vorhandene Tabellenzellen nicht ändern
+
+ZU BESPRECHEN MIT DECISIO:
+*Machbarkeitsanalyse nur bis 3. Kapitel, evtl. bis 4.
+* Feedback Länge und Still
+* Genaue Regeln für:
+    2.1 Steckbrief
+    - Zusammenhänge zwischen Verantwortung und Projektorganisationsform(was ist zugelassen und was nicht)
+    - Projektorganisationsform Zugelassene Namen
+    2.3 Priorisierung ausgewählter konkurrierender Ziele
+    - zugelassene Arten von Konflikten und Erläuterung
+    4.2 Stakeholder: Interessen, Erwartungen, Befrüchtungen, Massnahmen
+    - Allgemeine Richtlinien zum richtigen Einfüllung der Tabelle (Strategien, Massnahmen, etc)
