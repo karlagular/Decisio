@@ -1,7 +1,7 @@
 HINWEISE FÜR AUTHOREN
 * Keine Bilder werden verarbeitet
 * Formular-Checkboxes müssen durch (x) oder (-) ersetzt werdem um eingelessen zu werden
-* Alle Daten müssen folgendes Format haben: TT.MM.JJJJ
+* Alle Daten müssen folgendes Format haben: TT.MM.JJJJ Ohne Leerzeichen
 * Vor den Erkenntnisse zu den Kapiteln: "Projektrelevanz und Einschätzung" + Enter in fett und kursive hinzufügen.
 * Vorhandene Tabellenzellen nicht ändern
 
